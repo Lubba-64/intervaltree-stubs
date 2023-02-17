@@ -10,6 +10,12 @@ N = TypeVar("N", int, float, Real)
 def l2(num: SupportsFloat | SupportsIndex) -> SupportsFloat | SupportsIndex: ...
 
 class Node(Generic[N, T], object):
+    x_center: Interval[N, T] | None
+    s_center: set[Interval[N, T]]
+    left_node: Node[N, T] | None
+    right_node: Node[N, T] | None
+    depth: int
+    balance: int
     def __init__(
         self,
         x_center: Interval[N, T] | None = None,

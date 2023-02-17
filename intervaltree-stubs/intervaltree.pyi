@@ -2,11 +2,16 @@ from collections.abc import MutableSet, Iterable, Callable, Iterator
 from typing import TypeVar, Generic
 from numbers import Real
 from .interval import Interval
+from .node import Node
+from sortedcontainers import SortedDict  # type: ignore
 
 T = TypeVar("T")
 N = TypeVar("N", int, float, Real)
 
 class IntervalTree(MutableSet[T], Generic[N, T]):
+    all_intervals: list[Interval[N, T]] | None
+    top_node: Node[N, T]
+    boundary_table: SortedDict
     @classmethod
     def from_tuples(cls, tups: tuple[N, N] | tuple[N, N, T]) -> IntervalTree[N, T]: ...
     def __init__(self, intervals: list[Interval[N, T]] | None = None) -> None: ...
